@@ -1,0 +1,6 @@
+22, lala, 1234567, Prieteni
+32, ddd, 3322, Altele
+55, aasdds, 2342344, Familie
+220, wwww, 243252, Prieteni
+11, bbb, 54332, Prieteni
+5533, frww, 33322, Familie

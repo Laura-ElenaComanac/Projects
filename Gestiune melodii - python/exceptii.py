@@ -1,0 +1,2 @@
+class ExceptiiMelodie(Exception):
+    pass
