@@ -1,0 +1,4 @@
+4, 7, impartiri, 340
+3, 5, scaderi, 50
+10, 11, adunari, 120
+4, 7, algoritmi, 65
