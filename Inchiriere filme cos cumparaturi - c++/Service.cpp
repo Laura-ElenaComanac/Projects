@@ -1,6 +1,32 @@
 #include "Service.h"
 
 
+void Service::initializare()
+{
+	repository.initializeazaRepo();
+}
+
+void Service::adaugaCos(string titlu)
+{
+	repository.adaugaCos(titlu);
+}
+
+void Service::golesteCos()
+{
+	repository.golesteCos();
+}
+
+void Service::genereazaCos(int nrFilme)
+{
+	repository.genereazaCos(nrFilme);
+}
+
+vector<Film> Service::getCos()
+{
+	return repository.getCos();
+}
+
+
 void Service::addFilmService(string titlu, string gen, int an, string actor)
 {
 	Film film{ titlu,gen,an,actor };
@@ -40,23 +66,32 @@ void Service::updateAnService(string titlu, string gen, int an, string actor, in
 int Service::searchFilmService(string titlu, string gen, int an, string actor)
 {
 	Film film{ titlu,gen,an,actor };
-	if (this->repository.searchFilm(film) != -1)
-		return this->repository.searchFilm(film);
+	if (this->repository.getPozitie(film) != -1)
+		return this->repository.getPozitie(film);
 	throw RepoException("Film inexistent!\n");
 }
 
-VectorDinamic<Film> Service::filtrare(string titlu, int an)
+vector<Film> Service::filtrare(string titlu, int an)
 {
-	VectorDinamic<Film> rez;
-	VectorDinamic<Film>& filme = getAll();
+	vector<Film> filme = this->getAll();
+	vector<Film> filtered { filme.size() };
+
+	/*
 	for (int i=0;i<getRepoLungime();i++)
 	{
 		string t = this->getFilm(i).getTitlu();
 		int a = this->getFilm(i).getAn();
 		if (t == titlu && a == an)
-			rez.addElem(this->getFilm(i));
-	}
-	return rez;
+			rez.push_back(this->getFilm(i));
+	}*/
+
+	auto iterator = copy_if(filme.begin(), filme.end(), filtered.begin(),
+		[titlu, an](const Film& filmCurent)
+		{return filmCurent.getTitlu().compare(titlu) == 0 && filmCurent.getAn() == an; });
+
+	filtered.resize(iterator - filtered.begin());
+
+	return filtered;
 }
 /*
 bool Service::ordine(Film& s1, Film& s2)
@@ -81,17 +116,22 @@ bool Service::ordine(Film& s1, Film& s2)
 }
 */
 
-VectorDinamic<Film> Service::sortare(bool ordine(const Film& s1, const Film& s2))
+vector<Film> Service::sortare(bool ordine(const Film& s1, const Film& s2))
 {
-	VectorDinamic<Film>& filme = getAll();
-	for (int i = 0; i < (int)filme.getLungime() - 1; i++)
-		for (int j = i + 1; j < (int)filme.getLungime(); j++)
-			if (!ordine(filme.getElem(i), filme.getElem(j)))
-				swap(filme.getElem(i), filme.getElem(j));
+	vector<Film>& filme = getAll();
+	/*
+	for (int i = 0; i < (int)filme.size() - 1; i++)
+		for (int j = i + 1; j < (int)filme.size(); j++)
+			if (!ordine(filme[i], filme[j]))
+				swap(filme[i], filme[j]);
+	*/
+
+	std::sort(filme.begin(), filme.end(), ordine);
+
 	return filme;
 }
 
-VectorDinamic<Film>& Service::getAll()
+vector<Film>& Service::getAll()
 {
 	return repository.getAll();
 }
@@ -108,16 +148,16 @@ int Service::getRepoLungime()
 
 vector<DTO> Service::statistica()
 {
-	VectorDinamic<Film> v = this->repository.getAll();
+	vector<Film> v = repository.getAll();
 	map<string, int> count;
 	map<string, int>::iterator iter;
-	for (int i=0;i<v.getLungime();i++)
+	for (int i=0;i<v.size();i++)
 	{
-		iter = count.find(v.getElem(i).getGen());
+		iter = count.find(v[i].getGen());
 		if (iter == count.end())
-			count.insert(make_pair(v.getElem(i).getGen(), 1));
+			count.insert(make_pair(v[i].getGen(), 1));
 		else
-			count[v.getElem(i).getGen()]++;
+			count[v[i].getGen()]++;
 	}
 	vector<DTO> statistica;
 	for (iter = count.begin(); iter != count.end(); ++iter)

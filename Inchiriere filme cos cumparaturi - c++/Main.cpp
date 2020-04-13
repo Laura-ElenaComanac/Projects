@@ -9,7 +9,7 @@ int main() {
 		testRepo();
 		testService();
 		testStatistica();
-		testVectorDinamic();
+		//testVectorDinamic();
 		Repository repo;
 		Service srv{ repo };
 		UI ui{ srv };

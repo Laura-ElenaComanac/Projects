@@ -40,7 +40,24 @@ bool Film::operator==(const Film& f)
 	return false;
 }
 
-string Film::printFilm()
+const string Film::printFilm()
 {
-	return "Titlu: " + this->titlu + " Gen: " + this->gen + " Actor principal: " + this->actor_principal + " Anul aparitiei: " + std::to_string(this->anul_aparitiei) + "\n";
+	return "Titlu: " + this->titlu + "/ Gen: " + this->gen + "/ Actor principal: " + this->actor_principal + "/ Anul aparitiei: " + std::to_string(this->anul_aparitiei) + "\n";
 }
+
+const string Film::printFilmCVS()
+{
+	return this->titlu + "," + this->gen + "," + this->actor_principal + "," + std::to_string(this->anul_aparitiei) + "\n";
+}
+
+string Film::printFilmHTML()
+{
+	string s = "\t\t<tr>\n";
+	s += "\t\t\t<td>" + this->titlu + "</td>\n";
+	s += "\t\t\t<td>" + this->gen + "</td>\n";
+	s += "\t\t\t<td>" + this->actor_principal + "</td>\n";
+	s += "\t\t\t<td>" + std::to_string(this->anul_aparitiei) + "</td>\n";
+	s += "\t\t</tr>\n";
+	return s;
+}
+

@@ -4,4 +4,4 @@ void testStatistica();
 void testService();
 void testRepo();
 void testFilm();
-void testVectorDinamic();
+//void testVectorDinamic();

@@ -4,6 +4,7 @@
 #include <string>
 using std::string;
 
+#include <fstream>
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -27,13 +28,14 @@ public:
 	void setAn(int an);
 	void setActor(string actor);
 	bool operator==(const Film& f);
-	string printFilm();
+	const string printFilm();
+	const string printFilmCVS();
+	string printFilmHTML();
 
 
 	//Copy constructor
 	/*
-	Film(const Film& film) :titlu{ film.titlu }, gen{ film.gen }, anul_apari?iei{ film.an }, actor_principal{ film.actor }{
-		{
+	Film(const Film& film) :titlu{ film.titlu }, gen{ film.gen }, anul_apari?iei{ film.an }, actor_principal{ film.actor }{{
 	}*/
 };
 
