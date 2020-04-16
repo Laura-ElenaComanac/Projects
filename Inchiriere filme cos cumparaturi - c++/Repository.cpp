@@ -2,16 +2,26 @@
 
 void Repository::initializeazaRepo()
 {
-	filme.push_back(Film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" });
-	filme.push_back(Film{ "Terminator", "SF", 1984, "ArnoldSchwarzenegger" });
-	filme.push_back(Film{ "Bohemian", "drama", 2018, "RamiMalek" });
-	filme.push_back(Film{ "Noah", "biblical", 2014, "RusselCrowe" });
-	filme.push_back(Film{ "Colonia", "history", 2015, "EmmaWatson" });
-	filme.push_back(Film{ "Interstellar", "SF", 2014, "MatthewMcConaughey" });
-	filme.push_back(Film{ "Passengers", "romantic", 2016, "JenniferLawrence" });
-	filme.push_back(Film{ "Inception", "thriller", 2010, "LeonardoDiCaprio" });
-	filme.push_back(Film{ "Oblivion", "action", 2013, "TomCruise" });
-	filme.push_back(Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	std::pair<string, Film> film1("Titanic", Film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" });
+	filme.insert(film1);
+	std::pair<string, Film> film2("Terminator", Film{ "Terminator", "SF", 1984, "ArnoldSchwarzenegger" });
+	filme.insert(film2);
+	std::pair<string, Film> film3("Bohemian", Film{ "Bohemian", "drama", 2018, "RamiMalek" });
+	filme.insert(film3);
+	std::pair<string, Film> film4("Noah", Film{ "Noah", "biblical", 2014, "RusselCrowe" });
+	filme.insert(film4);
+	std::pair<string, Film> film5("Colonia", Film{ "Colonia", "history", 2015, "EmmaWatson" });
+	filme.insert(film5);
+	std::pair<string, Film> film6("Interstellar", Film{ "Interstellar", "SF", 2014, "MatthewMcConaughey" });
+	filme.insert(film6);
+	std::pair<string, Film> film7("Passengers", Film{ "Passengers", "romantic", 2016, "JenniferLawrence" });
+	filme.insert(film7);
+	std::pair<string, Film> film8("Inception", Film{ "Inception", "thriller", 2010, "LeonardoDiCaprio" });
+	filme.insert(film8);
+	std::pair<string, Film> film9("Oblivion", Film{ "Oblivion", "action", 2013, "TomCruise" });
+	filme.insert(film9);
+	std::pair<string, Film> film10("Nerve", Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	filme.insert(film10);
 }
 
 vector<Film> Repository::getCos()
@@ -21,14 +31,17 @@ vector<Film> Repository::getCos()
 
 void Repository::adaugaCos(string titlu)
 {
-	for (Film film : filme)
-		if (film.getTitlu() == titlu)
+	unordered_map<string, Film>::iterator it = filme.begin();
+	while (it != filme.end())
+	{
+		if ((*it).first == titlu)
 		{
-			cos.push_back(film);
+			cos.push_back((*it).second);
 			return;
 		}
-	throw RepoException("\nFilm inexistent!\n\n");
-}
+		it++;
+	}
+	throw RepoException("\nFilm inexistent!\n\n");}
 
 void Repository::golesteCos()
 {
@@ -86,79 +99,97 @@ void Repository::genereazaCos(int nrFilme)
 
 		cos.push_back(film);
 	}
-
 }
 
-int Repository::getPozitie(const Film& film) {
-	//iota(begin(filme), end(filme), 0);
-	std::vector<Film>::iterator it;
-	it = std::find(this->filme.begin(), this->filme.end(), film);
-	if(it != this->filme.end())
+string Repository::getPozitie(const Film& film) {
+	unordered_map<string, Film>::iterator it;
+	it = filme.find(film.getTitlu());
+	if(it != filme.end())
 	{
-		return it - this->filme.begin();
-	}
-	return -1;
-}
+		return it->first;}
+	else
+	{
+		return "";}}
 void Repository::addFilm(const Film& film) {
 	//std::vector<Film>::iterator it;
 	//it = std::find(this->filme.begin(), this->filme.end(), film);
-	if(std::find(filme.begin(), filme.end(), film) != filme.end())
+
+	unordered_map<string, Film>::iterator it;
+	if(getPozitie(film)!="")
 	{
 		throw RepoException("Film deja existent!");
-		//return;
 	}
-	filme.push_back(film);
+	//filme.push_back(film);
+
+	std::pair<string, Film> film1(film.getTitlu(), film);
+	filme.insert(film1);
 }
 
 void Repository::removeFilm(const Film& film)
 {
-	std::vector<Film>::iterator it;
-	it = std::find(this->filme.begin(), this->filme.end(), film);
-	if(it == this->filme.end())
+	//std::vector<Film>::iterator it;
+	//auto it = std::find(filme.begin(), filme.end(), film);
+
+	if(getPozitie(film) == "")
 	{
 		throw RepoException("Film inexistent!");
 	}
-	this->filme.erase(it);
+	filme.erase(film.getTitlu());
 }
 
 void Repository::updateTitlu(Film& film, string& titluC)
 {
-	int i = getPozitie(film);
-	if (i != -1)
-		this->filme[i].setTitlu(titluC);
+	string titlu = film.getTitlu();
+	unordered_map<string, Film>::iterator it = getFilm(titlu);
+	if (it != filme.end())
+		(*it).second.setTitlu(titluC);
+		
 }
 
 void Repository::updateGen(Film& film, string genC)
 {
-	int i = getPozitie(film);
-	if (i != -1)
-		this->filme[i].setGen(genC);
+	string titlu = film.getTitlu();
+	unordered_map<string, Film>::iterator it = getFilm(titlu);
+	if (it != filme.end())
+		(*it).second.setGen(genC);
 }
 
 void Repository::updateActor(Film& film, string actorC)
 {
-	int i = getPozitie(film);
-	if (i != -1)
-		this->filme[i].setActor(actorC);
+	string titlu = film.getTitlu();
+	unordered_map<string, Film>::iterator it = getFilm(titlu);
+	if (it != filme.end())
+		(*it).second.setActor(actorC);
 }
 
 void Repository::updateAn(Film& film, int anC)
 {
+	/*
 	int i = getPozitie(film);
 	if (i != -1)
-		this->filme[i].setAn(anC);
+		filme[i].setAn(anC);
+	*/
+	string titlu = film.getTitlu();
+	unordered_map<string, Film>::iterator it = getFilm(titlu);
+	if (it != filme.end())
+		(*it).second.setAn(anC);
 }
 
-vector<Film>& Repository::getAll() {
-	return this->filme;
+vector<Film> Repository::getAll() {
+	vector<Film> dest{filme.size()};
+	if (filme.empty() == true)
+		return dest;
+	transform(filme.begin(), filme.end(), dest.begin(), [] (auto it) {return it.second; });
+	return dest;
 }
 
-Film& Repository::getFilm(int i)
+unordered_map<string, Film>::iterator Repository::getFilm(string titlu)
 {
-	return this->filme[i];
+	unordered_map<string, Film>::iterator it = filme.find(titlu);
+	return it;
 }
 
 int Repository::getRepoLungime()
 {
-	return this->filme.size();
+	return filme.size();
 }

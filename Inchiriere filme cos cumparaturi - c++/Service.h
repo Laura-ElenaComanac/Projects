@@ -56,7 +56,7 @@ public:
 
 	/*Formeaza un obiect de tip Film in service cu parametrii titlu, gen, an, actor
 	Modifica titlul filmului din repository cu titluC*/
-	void updateTitluService(string titlu, string gen, int an, string actor, string titluC);
+	//void updateTitluService(string titlu, string gen, int an, string actor, string titluC);
 
 	/*Formeaza un obiect de tip Film in service cu parametrii titlu, gen, an, actor
 	Modifica genul filmului din repository cu genC*/
@@ -72,7 +72,7 @@ public:
 
 	/*Formeaza un obiect de tip Film in service cu parametrii titlu, gen, an, actor
 	Returneaza filmul cautat in repository*/
-	int searchFilmService(string titlu, string gen, int an, string actor);
+	string searchFilmService(string titlu, string gen, int an, string actor);
 
 	/*Returneaza lista filtrata de filme dupa titlu si an*/
 	vector<Film> filtrare(string titlu, int an);
@@ -81,15 +81,15 @@ public:
 	vector<Film> sortare(bool ordine(const Film& s1, const Film& s2));
 
 	/*Returneaza lista de filme*/
-	vector<Film>& getAll();
+	vector<Film> getAll();
 
 	/*Returneaza un film de pe pozitia i*/
-	Film& getFilm(int i);
+	Film& getFilm(string titlu);
 
 	/*Returneaza lungime repository*/
 	int getRepoLungime();
 
 	/*Returneaza o statistica a filmelor*/
-	vector<DTO> statistica();
+	vector<DTO> statistica(int &sum);
 
 };

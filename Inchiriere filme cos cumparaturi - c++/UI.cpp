@@ -152,32 +152,33 @@ void UI::updateFilmUI()
 	cin >> actor_principal;
 	cout << "Introduceti anul aparitiei: ";
 	cin >> anul_aparitiei;
-	cout << "1. Titlu\n2. Gen\n3. Actor principal\n4. Anul aparitiei\n";
+	cout << "1. Gen\n2. Actor principal\n3. Anul aparitiei\n";
 	cout << "Introduceti numarul corespunzator valorii pe care doriti sa o modificati: ";
 	cin >> call;
 	string titluC, genC, actor_principalC;
 	int anul_aparitieiC;
 	try {
 		switch (call) {
+		/*
 		case 1: {
 			cout << "Introduceti titlul: ";
 			cin >> titluC;
 			service.updateTitluService(titlu, gen, anul_aparitiei, actor_principal, titluC);
 			break;
-		}
-		case 2: {
+		}*/
+		case 1: {
 			cout << "Introduceti genul: ";
 			cin >> genC;
 			service.updateGenService(titlu, gen, anul_aparitiei, actor_principal, genC);
 			break;
 		}
-		case 3: {
+		case 2: {
 			cout << "Introduceti actorul principal: ";
 			cin >> actor_principalC;
 			service.updateActorService(titlu, gen, anul_aparitiei, actor_principal, actor_principalC);
 			break;
 		}
-		case 4: {
+		case 3: {
 			cout << "Introduceti anul aparitiei: ";
 			cin >> anul_aparitieiC;
 			service.updateAnService(titlu, gen, anul_aparitiei, actor_principal, anul_aparitieiC);
@@ -194,7 +195,7 @@ void UI::updateFilmUI()
 void UI::showAll()
 {
 	cout << "\nFilme ce pot fi inchiriate:\n\n";
-	vector<Film>& filme = service.getAll();
+	vector<Film> filme = service.getAll();
 	for (int i=0;i<filme.size();i++)
 		cout << filme[i].printFilm() << '\n';
 }
@@ -212,7 +213,7 @@ void UI::search()
 	cout << "Introduceti anul aparitiei: ";
 	cin >> anul_aparitiei;
 	try {
-		int i = service.searchFilmService(titlu, gen, anul_aparitiei, actor_principal);
+		string i = service.searchFilmService(titlu, gen, anul_aparitiei, actor_principal);
 		cout << "Filmul cautat este:\n";
 		Film& film = service.getFilm(i);
 		cout << film.printFilm();
@@ -272,12 +273,14 @@ void UI::sorting()
 
 void UI::statistica()
 {
-	vector<DTO> v = this->service.statistica();
+	int nr;
+	vector<DTO> v = this->service.statistica(nr);
 	cout << "Statistica: ";
 	for (DTO& obj : v)
 	{
 		cout << "Gen: " << obj.getGen() << " Numar: " << obj.getNrFilme()<<'\n';
 	}
+	cout << "Suma anilor este: " << nr<<'\n';
 }
 
 void UI::run()

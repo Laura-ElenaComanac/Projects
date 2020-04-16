@@ -10,11 +10,3 @@ public:
 	RepoException(string msg) : mesaj{ msg } {}
 	string getMesaj();
 };
-
-class ServiceException {
-private:
-	string mesaj;
-public:
-	ServiceException(string msg) : mesaj { msg } {}
-	string getMesaj();
-};

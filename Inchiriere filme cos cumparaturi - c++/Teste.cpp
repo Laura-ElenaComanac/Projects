@@ -10,7 +10,8 @@ void testStatistica()
 	srv.addFilmService("Titanic2", "drama", 1997, "LeonardoDiCaprio");
 	srv.addFilmService("Terminator", "SF", 1984, "Arnold");
 
-	vector<DTO> v = srv.statistica();
+	int nr;
+	vector<DTO> v = srv.statistica(nr);
 
 	assert(v[0].getGen() == "SF");
 	assert(v[0].getNrFilme() == 1);
@@ -21,26 +22,28 @@ void testStatistica()
 void testService() {
 	Repository repo;
 	Service srv{ repo };
+	assert(srv.getRepoLungime() == 0);
 	srv.addFilmService("Titanic", "drama", 1997, "LeonardoDiCaprio");
-	auto& filme1 = srv.getAll();
+	auto filme1 = srv.getAll();
 	assert(filme1.size() == 1);
 
-	srv.updateTitluService("Titanic", "drama", 1997, "LeonardoDiCaprio", "Terminator");
-	assert(srv.getFilm(0).getTitlu() == "Terminator");
-	srv.updateGenService("Terminator", "drama", 1997, "LeonardoDiCaprio", "SF");
-	assert(srv.getFilm(0).getGen() == "SF");
-	srv.updateAnService("Terminator", "SF", 1997, "LeonardoDiCaprio", 1984);
-	assert(srv.getFilm(0).getAn() == 1984);
-	srv.updateActorService("Terminator", "SF", 1984, "LeonardoDiCaprio", "Arnold");
-	assert(srv.getFilm(0).getActor() == "Arnold");
+	//srv.updateTitluService("Titanic", "drama", 1997, "LeonardoDiCaprio", "Terminator");
+	//assert(film1.getTitlu() == "Terminator");
+
+	srv.updateGenService("Titanic", "drama", 1997, "LeonardoDiCaprio", "SF");
+	assert(srv.getFilm("Titanic").getGen() == "SF");
+	srv.updateAnService("Titanic", "SF", 1997, "LeonardoDiCaprio", 1984);
+	assert(srv.getFilm("Titanic").getAn() == 1984);
+	srv.updateActorService("Titanic", "SF", 1984, "LeonardoDiCaprio", "Arnold");
+	assert(srv.getFilm("Titanic").getActor() == "Arnold");
 	
-	srv.removeFilmService("Terminator", "SF", 1984, "Arnold");
-	auto& filme2 = srv.getAll();
+	srv.removeFilmService("Titanic", "SF", 1984, "Arnold");
+	auto filme2 = srv.getAll();
 	assert(filme2.size() == 0);
 
 	srv.addFilmService("Titanic", "drama", 1997, "LeonardoDiCaprio");
 
-	assert(srv.searchFilmService("Titanic", "drama", 1997, "LeonardoDiCaprio") == 0);
+	assert(srv.searchFilmService("Titanic", "drama", 1997, "LeonardoDiCaprio") == "Titanic");
 	try {
 		srv.searchFilmService("Terminator", "SF", 1984, "Arnold");
 		assert(false);
@@ -49,13 +52,13 @@ void testService() {
 		assert(true);
 	}
 
-	srv.addFilmService("Titanic", "drama2", 1984, "LeonardoDiCaprio");
+	srv.addFilmService("Titanic1", "drama2", 1984, "LeonardoDiCaprio");
 	srv.addFilmService("Titanic2", "drama3", 1997, "LeonardoDiCaprio");
-	srv.addFilmService("Titanic", "drama5", 1997, "LeonardoDiCaprio");
+	srv.addFilmService("Titanic3", "drama5", 1997, "LeonardoDiCaprio");
 	//vector<Film> rez {srv.getFilm(0),srv.getFilm(3)};
 
-	assert(srv.filtrare("Titanic", 1997)[0]==srv.getFilm(0));
-	assert(srv.filtrare("Titanic", 1997)[1] == srv.getFilm(3));
+	assert(srv.filtrare("Titanic", 1997)[0]==srv.getFilm("Titanic"));
+	assert(srv.filtrare("Titanic2", 1997)[0] == srv.getFilm("Titanic2"));
 
 	Repository repo2;
 	Service srv2{ repo2 };
@@ -83,10 +86,13 @@ void testRepo() {
 	Repository repo;
 	RepoException repoEx{""};
 	Film film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" };
+	std::pair<string, Film> film1("Titanic",film);
+
 	repo.addFilm(film);
-	assert(repo.getPozitie(film) == 0);
-	//const auto& filme = repo.getAll();
-	vector<Film>& filme = repo.getAll();
+
+	assert(repo.getPozitie(film) == "Titanic");
+	auto filme = repo.getAll();
+	//vector<Film> filme = repo.getAll();
 	assert(filme.size() == 1);
 
 	try {
@@ -97,8 +103,10 @@ void testRepo() {
 		assert(true);
 	}
 
+	assert(filme.size() == 1);
+
 	repo.removeFilm(film);
-	assert(filme.size() == 0);
+	assert(repo.getRepoLungime() == 0);
 
 	try {
 		repo.removeFilm(film);
@@ -109,18 +117,27 @@ void testRepo() {
 		assert(ex.getMesaj() == "Film inexistent!");
 	}
 
-	assert(repo.getPozitie(film) == -1);
+	assert(repo.getPozitie(film) == "");
 
 	repo.addFilm(film);
-	string s= "Terminator";
+	string s= "Titanic";
+
 	repo.updateTitlu(film, s);
-	assert(repo.getFilm(0).getTitlu() == "Terminator");
-	repo.updateGen(repo.getFilm(0), "SF");
-	assert(repo.getFilm(0).getGen() == "SF");
-	repo.updateAn(repo.getFilm(0), 1984);
-	assert(repo.getFilm(0).getAn() == 1984);
-	repo.updateActor(repo.getFilm(0), "Arnold");
-	assert(repo.getFilm(0).getActor() == "Arnold");
+	unordered_map<string, Film>::iterator it = repo.getFilm(s);
+	Film film867 = it->second;
+	//cout << (*it).second.printFilm();
+
+	//assert(film1.getTitlu() == "Terminator");
+
+	//repo.updateGen(film, "SF");
+	//assert(film1.getGen() == "SF");
+
+	//repo.updateAn(film, 1984);
+	//assert(film1.getAn() == 1984);
+
+	//repo.updateActor(film, "Arnold");
+	//assert(film1.getActor() == "Arnold");
+
 
 	Repository repo2;
 	repo2.addFilm(Film("Nerve", "crime", 2016, "EmmaRoberts"));
@@ -137,6 +154,7 @@ void testRepo() {
 
 void testFilm()
 {
+	assert(!(Film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" } == Film{ "Terminator", "drama", 1997, "LeonardoDiCaprio" }));
 	Film film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" };
 	assert(film.getTitlu() == "Titanic");
 	assert(film.getGen() == "drama");

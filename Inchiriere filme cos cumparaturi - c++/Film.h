@@ -34,8 +34,6 @@ public:
 
 
 	//Copy constructor
-	/*
-	Film(const Film& film) :titlu{ film.titlu }, gen{ film.gen }, anul_apari?iei{ film.an }, actor_principal{ film.actor }{{
-	}*/
+	Film(const Film& film) :titlu{ film.titlu }, gen{ film.gen }, anul_aparitiei{ film.anul_aparitiei }, actor_principal{ film.actor_principal }{}
 };
 

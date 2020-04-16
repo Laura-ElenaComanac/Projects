@@ -38,13 +38,13 @@ void Service::removeFilmService(string titlu, string gen, int an, string actor)
 	Film film{ titlu,gen,an,actor };
 	this->repository.removeFilm(film);
 }
-
+/*
 void Service::updateTitluService(string titlu, string gen, int an, string actor, string titluC)
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.updateTitlu(film, titluC);
 }
-
+*/
 void Service::updateGenService(string titlu, string gen, int an, string actor, string genC)
 {
 	Film film{ titlu,gen,an,actor };
@@ -63,12 +63,12 @@ void Service::updateAnService(string titlu, string gen, int an, string actor, in
 	this->repository.updateAn(film, anul_aparitieiC);
 }
 
-int Service::searchFilmService(string titlu, string gen, int an, string actor)
+string Service::searchFilmService(string titlu, string gen, int an, string actor)
 {
 	Film film{ titlu,gen,an,actor };
-	if (this->repository.getPozitie(film) != -1)
-		return this->repository.getPozitie(film);
-	throw RepoException("Film inexistent!\n");
+	if (this->repository.getPozitie(film) == "")
+		throw RepoException("Film inexistent!\n");
+	return this->repository.getPozitie(film);
 }
 
 vector<Film> Service::filtrare(string titlu, int an)
@@ -118,7 +118,7 @@ bool Service::ordine(Film& s1, Film& s2)
 
 vector<Film> Service::sortare(bool ordine(const Film& s1, const Film& s2))
 {
-	vector<Film>& filme = getAll();
+	vector<Film> filme = getAll();
 	/*
 	for (int i = 0; i < (int)filme.size() - 1; i++)
 		for (int j = i + 1; j < (int)filme.size(); j++)
@@ -131,14 +131,16 @@ vector<Film> Service::sortare(bool ordine(const Film& s1, const Film& s2))
 	return filme;
 }
 
-vector<Film>& Service::getAll()
+
+vector<Film> Service::getAll()
 {
 	return repository.getAll();
 }
 
-Film& Service::getFilm(int i)
+Film& Service::getFilm(string titlu)
 {
-	return repository.getFilm(i);
+	unordered_map<string,Film>::iterator it = repository.getFilm(titlu);
+	return (*it).second;
 }
 
 int Service::getRepoLungime()
@@ -146,11 +148,13 @@ int Service::getRepoLungime()
 	return this->repository.getRepoLungime();
 }
 
-vector<DTO> Service::statistica()
+vector<DTO> Service::statistica(int &sum)
 {
 	vector<Film> v = repository.getAll();
-	map<string, int> count;
+
+	map<string, int> count; // <gen,nrFilme>
 	map<string, int>::iterator iter;
+
 	for (int i=0;i<v.size();i++)
 	{
 		iter = count.find(v[i].getGen());
@@ -159,6 +163,11 @@ vector<DTO> Service::statistica()
 		else
 			count[v[i].getGen()]++;
 	}
+
+	sum = 0;
+	vector<Film> filme = repository.getCos();
+	sum = std::accumulate(filme.begin(), filme.end(), sum, [](int nr, Film film ) {return nr+film.getAn(); });
+	
 	vector<DTO> statistica;
 	for (iter = count.begin(); iter != count.end(); ++iter)
 	{

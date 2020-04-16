@@ -5,9 +5,15 @@
 #include <vector>
 using std::vector;
 #include <numeric>
-using std::iota;
+//using std::iota;
 
+#include<functional>
 #include <algorithm>
+using std::transform;
+
+#include <unordered_map>
+using std::unordered_map;
+
 #include <random> // std::default_random_engine
 #include <chrono> // std::chrono::system_clock
 
@@ -16,7 +22,8 @@ class Repository
 {
 private:
 	vector<Film> cos;
-	vector<Film> filme;
+	unordered_map<string, Film> filme;
+	
 public:
 	Repository() = default; //default constructor
 
@@ -38,7 +45,7 @@ public:
 
 
 	/*Returneaza pozitia filmului film*/
-	int getPozitie(const Film& film);
+	string getPozitie(const Film& film);
 
 	/*Adauga filmul in lista de filme
 	Arunca exceptie daca filmul deja exista*/
@@ -61,10 +68,10 @@ public:
 	void updateAn(Film& film, int anC);
 
 	/*Returneaza lista de filme*/
-	vector<Film>& getAll();
+	vector<Film> getAll();
 
 	/*Rrturneaza filmul de pe pozitia i*/
-	Film& getFilm(int i);
+	unordered_map<string, Film>::iterator getFilm(string titlu);
 
 	/*Retuneaza lungime repository*/
 	int getRepoLungime();
