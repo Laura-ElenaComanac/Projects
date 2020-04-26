@@ -1,0 +1,21 @@
+[2020-04-26 13:09:49] [info] Start Program:
+Path:"C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena\\Debug\\Lab6-7.1_Olaru_Laura-Elena.exe"
+Arguments:
+Working directory: "C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena\\Lab6-7.1_Olaru_Laura-Elena\\"
+Modules: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe Excluded: 
+Sources: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Lab6-7.1_Olaru_Laura-Elena Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: binary C:\Users\laura-elena.olaru\AppData\Local\Temp\etkzc42f.ajy 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-04-26 13:09:49] [info] Module: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe is selected because it matches selected pattern: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe
+[2020-04-26 13:09:50] [info] ----------------------------------------------------
+[2020-04-26 13:09:50] [info] Coverage binary generated in file: C:\Users\laura-elena.olaru\AppData\Local\Temp\etkzc42f.ajy
+[2020-04-26 13:09:50] [info] ----------------------------------------------------

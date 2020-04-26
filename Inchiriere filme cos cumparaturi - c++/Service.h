@@ -1,5 +1,6 @@
 #pragma once
 #include "Repository.h"
+#include "ActiuneUndo.h"
 #include <algorithm>
 #include <utility>
 using std::swap;
@@ -15,7 +16,7 @@ private:
 	string gen;
 	int nrFilme;
 public:
-	DTO(string gen, int nrFilme) : gen{ gen }, nrFilme{nrFilme}{}
+	DTO(string gen, int nrFilme) : gen{ gen }, nrFilme{ nrFilme }{}
 	string getGen();
 	int getNrFilme();
 };
@@ -25,9 +26,13 @@ class Service
 {
 private:
 	Repository& repository;
+	//RepositoryFile& repositoryFile;
+	vector<std::shared_ptr<ActiuneUndo>> actiuniUndo;
 public:
-	Service(Repository& repo) :repository{ repo } {}
+	Service(Repository& repo) :repository{ repo }{}
 	//Service() = default;
+
+	//~Service();
 
 	/*Initializeaza repository cu 10 filme*/
 	void initializare();
@@ -92,4 +97,5 @@ public:
 	/*Returneaza o statistica a filmelor*/
 	vector<DTO> statistica(int &sum);
 
+	void undo();
 };

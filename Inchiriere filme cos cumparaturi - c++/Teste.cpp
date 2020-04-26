@@ -80,13 +80,35 @@ void testService() {
 	assert(cos[0] == Film("Nerve", "crime", 2016, "EmmaRoberts"));
 	srv3.genereazaCos(3);
 	srv3.golesteCos();
+
+	Repository repo4;
+	Service srv4{ repo4 };
+	assert(srv4.getRepoLungime() == 0);
+	srv4.initializare();
+	assert(srv4.getRepoLungime() == 10);
+	srv4.removeFilmService("Titanic", "drama", 1997, "LeonardoDiCaprio");
+	srv4.undo();
+	assert(srv4.getRepoLungime() == 10);
+	srv4.addFilmService("Laura","SF",2000,"Elena");
+	srv4.undo();
+	assert(srv4.getRepoLungime() == 10);
+	srv4.updateAnService("Titanic", "drama", 1997, "LeonardoDiCaprio", 2000);
+	srv4.undo();
+	assert(srv4.getFilm("Titanic").getAn() == 1997);
+	try {
+		srv4.undo();
+		assert(false);
+	}
+	catch (RepoException ex) {
+		assert(true);
+	}
 }
 
 void testRepo() {
 	Repository repo;
-	RepoException repoEx{""};
+	RepoException repoEx{ "" };
 	Film film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" };
-	std::pair<string, Film> film1("Titanic",film);
+	std::pair<string, Film> film1("Titanic", film);
 
 	repo.addFilm(film);
 
@@ -120,9 +142,9 @@ void testRepo() {
 	assert(repo.getPozitie(film) == "");
 
 	repo.addFilm(film);
-	string s= "Titanic";
+	string s = "Titanic";
 
-	repo.updateTitlu(film, s);
+	//repo.updateTitlu(film, s);
 	unordered_map<string, Film>::iterator it = repo.getFilm(s);
 	Film film867 = it->second;
 	//cout << (*it).second.printFilm();
@@ -150,6 +172,31 @@ void testRepo() {
 		ex.getMesaj() == "\nFilm inexistent!\n\n";
 	}
 
+	RepositoryFile repo3{ "Teste.txt" };
+	repo3.addFilm(Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	assert(repo3.getRepoLungime() == 1);
+	repo3.removeFilm(Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	assert(repo3.getRepoLungime() == 0);
+	repo3.addFilm(Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	Film film2{ "Nerve", "crime", 2016, "EmmaRoberts" };
+	repo3.updateGen(film, "horror");
+	repo3.updateGen(film, "crime");
+	repo3.updateAn(film, 2000);
+	repo3.updateAn(film, 2016);
+	repo3.updateActor(film, "Laura");
+	repo3.updateActor(film, "EmmaRoberts");
+	repo3.removeFilm(Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
+	repo3.setFileName("Teste2.txt");
+	assert(repo3.getFileName()== "Teste2.txt");
+
+	try {
+		RepositoryFile repo4{ "aaa.txt" };
+		assert(false);
+	}
+	catch (RepoException ex){
+		assert(true);
+	}
+	
 }
 
 void testFilm()
@@ -173,7 +220,7 @@ void testFilm()
 	assert(s == "Titlu: Terminator/ Gen: SF/ Actor principal: Arnold/ Anul aparitiei: 1984\n");
 
 	const string s2 = film.printFilmCVS();
-	assert(s2 == "Terminator,SF,Arnold,1984\n");
+	assert(s2 == "Terminator,SF,1984,Arnold\n");
 
 	string s3 = film.printFilmHTML();
 	assert(s3 == "\t\t<tr>\n\t\t\t<td>Terminator</td>\n\t\t\t<td>SF</td>\n\t\t\t<td>Arnold</td>\n\t\t\t<td>1984</td>\n\t\t</tr>\n");

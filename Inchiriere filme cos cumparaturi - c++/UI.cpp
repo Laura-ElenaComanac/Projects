@@ -283,8 +283,20 @@ void UI::statistica()
 	cout << "Suma anilor este: " << nr<<'\n';
 }
 
+void UI::undo()
+{
+	try {
+		service.undo();
+		cout << "Operatia de undo executata cu succes!\n";
+	}
+	catch (RepoException ex) {
+		cout << ex.getMesaj();
+	}
+}
+
 void UI::run()
 {
+	string fileName;
 	int comanda = -1;
 	while (comanda) {
 		cout << "\nMeniu inchiriere filme:\n\n";
@@ -296,6 +308,7 @@ void UI::run()
 		cout << "12. Genereaza cos\n";
 		cout << "13. Export\n";
 		cout << "14. Afiseaza filme din cos\n";
+		cout << "15. Undo\n";
 		cout << "\nIntroduceti comanda: ";
 		cin >> comanda;
 		cout << "\n";
@@ -359,6 +372,10 @@ void UI::run()
 		}
 		case 14: {
 			showCos();
+			break;
+		}
+		case 15: {
+			undo();
 			break;
 		}
 		}

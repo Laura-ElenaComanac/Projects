@@ -3,25 +3,35 @@
 void Repository::initializeazaRepo()
 {
 	std::pair<string, Film> film1("Titanic", Film{ "Titanic", "drama", 1997, "LeonardoDiCaprio" });
-	filme.insert(film1);
+	//filme.insert(film1);
+	this->addFilm(film1.second);
 	std::pair<string, Film> film2("Terminator", Film{ "Terminator", "SF", 1984, "ArnoldSchwarzenegger" });
-	filme.insert(film2);
+	//filme.insert(film2);
+	this->addFilm(film2.second);
 	std::pair<string, Film> film3("Bohemian", Film{ "Bohemian", "drama", 2018, "RamiMalek" });
-	filme.insert(film3);
+	//filme.insert(film3);
+	this->addFilm(film3.second);
 	std::pair<string, Film> film4("Noah", Film{ "Noah", "biblical", 2014, "RusselCrowe" });
-	filme.insert(film4);
+	//filme.insert(film4);
+	this->addFilm(film4.second);
 	std::pair<string, Film> film5("Colonia", Film{ "Colonia", "history", 2015, "EmmaWatson" });
-	filme.insert(film5);
+	//filme.insert(film5);
+	this->addFilm(film5.second);
 	std::pair<string, Film> film6("Interstellar", Film{ "Interstellar", "SF", 2014, "MatthewMcConaughey" });
-	filme.insert(film6);
+	//filme.insert(film6);
+	this->addFilm(film6.second);
 	std::pair<string, Film> film7("Passengers", Film{ "Passengers", "romantic", 2016, "JenniferLawrence" });
-	filme.insert(film7);
+	//filme.insert(film7);
+	this->addFilm(film7.second);
 	std::pair<string, Film> film8("Inception", Film{ "Inception", "thriller", 2010, "LeonardoDiCaprio" });
-	filme.insert(film8);
+	//filme.insert(film8);
+	this->addFilm(film8.second);
 	std::pair<string, Film> film9("Oblivion", Film{ "Oblivion", "action", 2013, "TomCruise" });
-	filme.insert(film9);
+	//filme.insert(film9);
+	this->addFilm(film9.second);
 	std::pair<string, Film> film10("Nerve", Film{ "Nerve", "crime", 2016, "EmmaRoberts" });
-	filme.insert(film10);
+	//filme.insert(film10);
+	this->addFilm(film10.second);
 }
 
 vector<Film> Repository::getCos()
@@ -136,7 +146,7 @@ void Repository::removeFilm(const Film& film)
 	}
 	filme.erase(film.getTitlu());
 }
-
+/*
 void Repository::updateTitlu(Film& film, string& titluC)
 {
 	string titlu = film.getTitlu();
@@ -145,7 +155,7 @@ void Repository::updateTitlu(Film& film, string& titluC)
 		(*it).second.setTitlu(titluC);
 		
 }
-
+*/
 void Repository::updateGen(Film& film, string genC)
 {
 	string titlu = film.getTitlu();
@@ -192,4 +202,47 @@ unordered_map<string, Film>::iterator Repository::getFilm(string titlu)
 int Repository::getRepoLungime()
 {
 	return filme.size();
+}
+
+///RepositoryFile
+
+void RepositoryFile::loadFromFile()
+{
+	std::ifstream in(fileName);
+	if (!in.is_open()) {
+		throw RepoException("Nu exista fisierul "+fileName+"!\n");
+	}
+	string linie;
+	while (getline(in, linie)) {//!in.eof()
+		vector<string> v;
+		char lin[100];
+		strcpy(lin, linie.c_str());
+		char* p;
+		string s;
+		for (p = strtok(lin, ","); p != NULL; p = strtok(NULL, ","))
+		{
+			s = p;
+			v.push_back(s);
+		}
+		Film film{ v[0],v[1],stoi(v[2]),v[3] };
+		std::pair<string, Film> film1(v[0], film);
+		filme.insert(film1);
+	}
+}
+
+void RepositoryFile::writeToFile()
+{
+	std::ofstream out(fileName);
+	for (auto& film : filme)
+		out << film.second.printFilmCVS();
+}
+
+void RepositoryFile::setFileName(string fileName)
+{
+	this->fileName = fileName;
+}
+
+string RepositoryFile::getFileName()
+{
+	return fileName;
 }

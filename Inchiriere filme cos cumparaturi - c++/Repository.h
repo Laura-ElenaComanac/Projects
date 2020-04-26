@@ -7,6 +7,7 @@ using std::vector;
 #include <numeric>
 //using std::iota;
 
+#include <memory>
 #include<functional>
 #include <algorithm>
 using std::transform;
@@ -20,7 +21,7 @@ using std::unordered_map;
 
 class Repository
 {
-private:
+protected:
 	vector<Film> cos;
 	unordered_map<string, Film> filme;
 	
@@ -49,23 +50,23 @@ public:
 
 	/*Adauga filmul in lista de filme
 	Arunca exceptie daca filmul deja exista*/
-	void addFilm(const Film& film);
+	virtual void addFilm(const Film& film);
 
 	/*Sterge filmul din lista de filme
 	Arunca exceptie daca filmul nu exista*/
-	void removeFilm(const Film& film);
+	virtual void removeFilm(const Film& film);
 
 	/*Modifica titlul filmului din lista de filme cu titluC*/
-	void updateTitlu(Film& film, string& titluC);
+	//virtual void updateTitlu(Film& film, string& titluC);
 
 	/*Modifica genul filmului din lista de filme cu genC*/
-	void updateGen(Film& film, string genC);
+	virtual void updateGen(Film& film, string genC);
 
 	/*Modifica actorul filmului din lista de filme cu actorC*/
-	void updateActor(Film& film, string actorC);
+	virtual void updateActor(Film& film, string actorC);
 
 	/*Modifica anul filmului din lista de filme cu anC*/
-	void updateAn(Film& film, int anC);
+	virtual void updateAn(Film& film, int anC);
 
 	/*Returneaza lista de filme*/
 	vector<Film> getAll();
@@ -75,4 +76,38 @@ public:
 
 	/*Retuneaza lungime repository*/
 	int getRepoLungime();
+};
+
+class RepositoryFile:public Repository {
+private:
+	string fileName;
+	void loadFromFile();
+	void writeToFile();
+public:
+	RepositoryFile() = default;
+	RepositoryFile(string fileName) :Repository(), fileName{ fileName }{
+		loadFromFile(); // in constructor incarcam datele din fisier
+	}
+	void addFilm(const Film& film) override {
+		Repository::addFilm(film); // apelam metoda din clasa de baza
+		writeToFile();
+	}
+	void removeFilm(const Film& film) override {
+		Repository::removeFilm(film);
+		writeToFile();
+	}
+	void updateGen(Film& film, string genC) override {
+		Repository::updateGen(film, genC);
+		writeToFile();
+	}
+	void updateActor(Film& film, string actorC) override {
+		Repository::updateActor(film, actorC);
+		writeToFile();
+	}
+	void updateAn(Film& film, int anC) override {
+		Repository::updateAn(film, anC);
+		writeToFile();
+	}
+	void setFileName(string fileName);
+	string getFileName();
 };

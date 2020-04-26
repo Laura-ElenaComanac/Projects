@@ -1,6 +1,12 @@
 #include "Service.h"
 
-
+/*
+Service::~Service()
+{
+	for (auto& actiune : actiuniUndo)
+		delete actiune.release();
+}
+*/
 void Service::initializare()
 {
 	repository.initializeazaRepo();
@@ -31,12 +37,14 @@ void Service::addFilmService(string titlu, string gen, int an, string actor)
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.addFilm(film);
+	actiuniUndo.push_back(std::make_shared<UndoAdauga>(repository, film));
 }
 
 void Service::removeFilmService(string titlu, string gen, int an, string actor)
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.removeFilm(film);
+	actiuniUndo.push_back(std::make_shared<UndoSterge>(repository, film));
 }
 /*
 void Service::updateTitluService(string titlu, string gen, int an, string actor, string titluC)
@@ -49,18 +57,21 @@ void Service::updateGenService(string titlu, string gen, int an, string actor, s
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.updateGen(film, genC);
+	actiuniUndo.push_back(std::make_shared<UndoModifica>(repository, film));
 }
 
 void Service::updateActorService(string titlu, string gen, int an, string actor, string anC)
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.updateActor(film, anC);
+	actiuniUndo.push_back(std::make_shared<UndoModifica>(repository, film));
 }
 
 void Service::updateAnService(string titlu, string gen, int an, string actor, int anul_aparitieiC)
 {
 	Film film{ titlu,gen,an,actor };
 	this->repository.updateAn(film, anul_aparitieiC);
+	actiuniUndo.push_back(std::make_shared<UndoModifica>(repository, film));
 }
 
 string Service::searchFilmService(string titlu, string gen, int an, string actor)
@@ -175,6 +186,14 @@ vector<DTO> Service::statistica(int &sum)
 		statistica.push_back(obj);
 	}
 	return statistica;
+}
+
+void Service::undo()
+{
+	if (this->actiuniUndo.size() == 0)
+		throw RepoException("Nu mai exista operatii!\n");
+	actiuniUndo.back()->doUndo();
+	actiuniUndo.pop_back();
 }
 
 string DTO::getGen(){

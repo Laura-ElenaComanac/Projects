@@ -9,7 +9,7 @@ private:
 	Service& service;
 public:
 	UI(Service& srv) : service{ srv } {
-		service.initializare();
+		//service.initializare();
 	}
 
 	void showCos();
@@ -27,5 +27,6 @@ public:
 	void filter();
 	void sorting();
 	void statistica();
+	void undo();
 	void run();
 };

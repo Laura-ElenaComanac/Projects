@@ -1,19 +1,23 @@
 #include "UI.h"
 #include "Teste.h"
-#include <crtdbg.h>
 #define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
 
 int main() {
 	{
+		//vector<std::shared_ptr<ActiuneUndo>> actiuniUndo;
+
 		testFilm();
 		testRepo();
 		testService();
 		testStatistica();
 		//testVectorDinamic();
-		Repository repo;
-		Service srv{ repo };
+		string fileName;
+		RepositoryFile repoFile{ "Filme.txt" };
+		Service srv{ repoFile };
 		UI ui{ srv };
 		ui.run();
+		//actiuniUndo.push_back(std::make_shared<UndoAdauga>(repoFile, Film{"a","a",1,"a"}));
 	}
 	_CrtDumpMemoryLeaks();
 

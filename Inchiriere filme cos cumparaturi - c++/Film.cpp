@@ -47,7 +47,7 @@ const string Film::printFilm()
 
 const string Film::printFilmCVS()
 {
-	return this->titlu + "," + this->gen + "," + this->actor_principal + "," + std::to_string(this->anul_aparitiei) + "\n";
+	return this->titlu + "," + this->gen + "," + std::to_string(this->anul_aparitiei) + "," + this->actor_principal + "\n";
 }
 
 string Film::printFilmHTML()
