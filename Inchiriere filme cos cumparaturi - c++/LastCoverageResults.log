@@ -1,21 +1,23 @@
-[2020-04-26 13:09:49] [info] Start Program:
-Path:"C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena\\Debug\\Lab6-7.1_Olaru_Laura-Elena.exe"
+[2020-04-02 09:58:42] [info] Start Program:
+Path:"C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena_215\\Debug\\Lab6-7.1_Olaru_Laura-Elena_215.exe"
 Arguments:
-Working directory: "C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena\\Lab6-7.1_Olaru_Laura-Elena\\"
-Modules: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe Excluded: 
-Sources: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Lab6-7.1_Olaru_Laura-Elena Excluded: 
+Working directory: "C:\\visual projects\\Lab6-7.1_Olaru_Laura-Elena_215\\Lab6-7.1_Olaru_Laura-Elena_215\\"
+Modules: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena_215\Debug\Lab6-7.1_Olaru_Laura-Elena_215.exe Excluded: 
+Sources: Selected: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena_215\Lab6-7.1_Olaru_Laura-Elena_215 Excluded: 
 Log Level: Normal
 Cover Children: 0
 Aggregate by file: 1
 Continue after C++ exception: 0
 Optimized build support: 0
-Export: binary C:\Users\laura-elena.olaru\AppData\Local\Temp\etkzc42f.ajy 
+Export: binary C:\Users\laura-elena.olaru\AppData\Local\Temp\zx53ecsb.lyb 
 Input coverage: 
 Unified diff: 
 Excluded line regular expressions: 
 Substitute pdb source paths: 
 
-[2020-04-26 13:09:49] [info] Module: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe is selected because it matches selected pattern: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena\Debug\Lab6-7.1_Olaru_Laura-Elena.exe
-[2020-04-26 13:09:50] [info] ----------------------------------------------------
-[2020-04-26 13:09:50] [info] Coverage binary generated in file: C:\Users\laura-elena.olaru\AppData\Local\Temp\etkzc42f.ajy
-[2020-04-26 13:09:50] [info] ----------------------------------------------------
+[2020-04-02 09:58:42] [info] Module: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena_215\Debug\Lab6-7.1_Olaru_Laura-Elena_215.exe is selected because it matches selected pattern: C:\visual projects\Lab6-7.1_Olaru_Laura-Elena_215\Debug\Lab6-7.1_Olaru_Laura-Elena_215.exe
+[2020-04-02 10:02:53] [info] ----------------------------------------------------
+[2020-04-02 10:02:53] [info] Coverage binary generated in file: C:\Users\laura-elena.olaru\AppData\Local\Temp\4fjngd2m.edb
+[2020-04-02 10:02:53] [info] ----------------------------------------------------
+[2020-04-02 10:02:53] [warning] No modules were selected. Please check the values of --modules and --excluded_modules.
+You can try to remove all --modules and --excluded_modules and use --modules=C:\visual projects\Lab6-7.1_Olaru_Laura-Elena_215\Debug instead.

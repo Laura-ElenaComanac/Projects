@@ -8,17 +8,7 @@ class UI
 private:
 	Service& service;
 public:
-	UI(Service& srv) : service{ srv } {
-		//service.initializare();
-	}
-
-	void showCos();
-	void adaugaCos();
-	void golesteCos();
-	void genereazaCos();
-	void printFilmeHTML(string st);
-	void exportCos();
-
+	UI(Service& srv) : service{ srv } {}
 	void addFilmUI();
 	void removeFilmUI();
 	void updateFilmUI();
@@ -26,7 +16,5 @@ public:
 	void search();
 	void filter();
 	void sorting();
-	void statistica();
-	void undo();
 	void run();
 };

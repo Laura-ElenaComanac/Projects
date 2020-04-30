@@ -1,4 +1,4 @@
-#include "Film.h"
+﻿#include "Film.h"
 
 string Film::getTitlu() const {
 	return titlu;
@@ -13,9 +13,9 @@ int Film::getAn() const {
 	return anul_aparitiei;
 }
 
-void Film::setTitlu(const string& titluC)
+void Film::setTitlu(string titluC)
 {
-	this->titlu=titluC;
+	this->titlu = titluC;
 }
 
 void Film::setGen(string genC)
@@ -35,29 +35,12 @@ void Film::setActor(string actorC)
 
 bool Film::operator==(const Film& f)
 {
-	if (this->titlu == f.titlu && this->gen == f.gen && this->actor_principal == f.actor_principal && this->anul_aparitiei == f.anul_aparitiei)
+	if (this->titlu == f.titlu && this->gen == f.gen && this->actor_principal == f.actor_principal && this->anul_aparitiei == f.anul_aparitiei) 
 		return true;
 	return false;
 }
 
-const string Film::printFilm()
+string Film::printFilm()
 {
-	return "Titlu: " + this->titlu + "/ Gen: " + this->gen + "/ Actor principal: " + this->actor_principal + "/ Anul aparitiei: " + std::to_string(this->anul_aparitiei) + "\n";
+	return "Titlu: "+this->titlu + " Gen: "+this->gen + " Actor principal: "+this->actor_principal + " Anul aparitiei: " + std::to_string(this->anul_aparitiei)+"\n";
 }
-
-const string Film::printFilmCVS()
-{
-	return this->titlu + "," + this->gen + "," + std::to_string(this->anul_aparitiei) + "," + this->actor_principal + "\n";
-}
-
-string Film::printFilmHTML()
-{
-	string s = "\t\t<tr>\n";
-	s += "\t\t\t<td>" + this->titlu + "</td>\n";
-	s += "\t\t\t<td>" + this->gen + "</td>\n";
-	s += "\t\t\t<td>" + this->actor_principal + "</td>\n";
-	s += "\t\t\t<td>" + std::to_string(this->anul_aparitiei) + "</td>\n";
-	s += "\t\t</tr>\n";
-	return s;
-}
-
