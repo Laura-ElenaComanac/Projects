@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 	RepositoryFile repoFile{ "Filme.txt", 0 };
 	Service srv{ repoFile };
 	FilmeGUI gui{ srv };
+	CosGUI guiCos{ srv };
 
 	gui.show();
 

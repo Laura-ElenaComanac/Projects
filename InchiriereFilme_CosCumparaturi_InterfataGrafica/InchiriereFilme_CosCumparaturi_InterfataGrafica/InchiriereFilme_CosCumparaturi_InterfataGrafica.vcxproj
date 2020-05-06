@@ -110,6 +110,7 @@
     <ClInclude Include="VectorDinamic.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Cos.txt" />
     <Text Include="Filme.txt" />
     <Text Include="Teste.txt" />
   </ItemGroup>
