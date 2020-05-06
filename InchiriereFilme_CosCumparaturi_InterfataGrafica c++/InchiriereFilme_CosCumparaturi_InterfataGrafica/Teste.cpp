@@ -79,8 +79,8 @@ void testService() {
 	srv.addFilmService("Titanic3", "drama5", 1997, "LeonardoDiCaprio");
 	//vector<Film> rez {srv.getFilm(0),srv.getFilm(3)};
 
-	assert(srv.filtrare("Titanic", 1997)[0] == srv.getFilm("Titanic"));
-	assert(srv.filtrare("Titanic2", 1997)[0] == srv.getFilm("Titanic2"));
+	assert(srv.filtrare(1997)[0] == srv.getFilm("Titanic"));
+	assert(srv.filtrare(1997)[0] == srv.getFilm("Titanic2"));
 
 	Repository repo2;
 	Service srv2{ repo2 };

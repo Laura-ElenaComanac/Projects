@@ -1,6 +1,4 @@
 #include "InchiriereFilme_CosCumparaturi_InterfataGrafica.h"
-#include <QtWidgets/QApplication>
-#include "Service.h"
 
 int main(int argc, char *argv[])
 {

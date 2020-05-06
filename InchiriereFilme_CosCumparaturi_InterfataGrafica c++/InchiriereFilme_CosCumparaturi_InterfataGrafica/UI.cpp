@@ -231,7 +231,7 @@ void UI::filter()
 	cin >> titlu;
 	cout << "Introduceti anul aparitiei: ";
 	cin >> anul_aparitiei;
-	vector<Film> rez = service.filtrare(titlu, anul_aparitiei);
+	vector<Film> rez = service.filtrare(anul_aparitiei);
 	cout << "Filmele filtrate sunt:\n";
 	for (int i = 0; i < rez.size(); i++)
 		cout << rez[i].printFilm() << '\n';

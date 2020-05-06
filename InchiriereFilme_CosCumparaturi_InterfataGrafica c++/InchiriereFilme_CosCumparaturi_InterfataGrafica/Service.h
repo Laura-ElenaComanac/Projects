@@ -80,7 +80,7 @@ public:
 	string searchFilmService(string titlu, string gen, int an, string actor);
 
 	/*Returneaza lista filtrata de filme dupa titlu si an*/
-	vector<Film> filtrare(string titlu, int an);
+	vector<Film> filtrare(int an);
 
 	/*Sorteaza lista de filme dupa o functie ordine*/
 	vector<Film> sortare(bool ordine(const Film& s1, const Film& s2));
@@ -88,7 +88,7 @@ public:
 	/*Returneaza lista de filme*/
 	vector<Film> getAll();
 
-	/*Returneaza un film de pe pozitia i*/
+	/*Returneaza un film cu titlul titlu*/
 	Film& getFilm(string titlu);
 
 	/*Returneaza lungime repository*/

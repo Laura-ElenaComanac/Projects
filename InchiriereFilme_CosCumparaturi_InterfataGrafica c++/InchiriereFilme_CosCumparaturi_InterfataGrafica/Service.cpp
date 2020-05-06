@@ -84,7 +84,7 @@ string Service::searchFilmService(string titlu, string gen, int an, string actor
 	return this->repository.getPozitie(film);
 }
 
-vector<Film> Service::filtrare(string titlu, int an)
+vector<Film> Service::filtrare(int an)
 {
 	vector<Film> filme = this->getAll();
 	vector<Film> filtered{ filme.size() };
@@ -99,8 +99,8 @@ vector<Film> Service::filtrare(string titlu, int an)
 	}*/
 
 	auto iterator = copy_if(filme.begin(), filme.end(), filtered.begin(),
-		[titlu, an](const Film& filmCurent)
-		{return filmCurent.getTitlu().compare(titlu) == 0 && filmCurent.getAn() == an; });
+		[an](const Film& filmCurent)
+		{return filmCurent.getAn() == an; });
 
 	filtered.resize(iterator - filtered.begin());
 
