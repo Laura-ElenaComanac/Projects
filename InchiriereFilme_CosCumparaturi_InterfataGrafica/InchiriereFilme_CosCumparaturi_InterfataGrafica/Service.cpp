@@ -12,6 +12,11 @@ void Service::initializare()
 	repository.initializeazaRepo();
 }
 
+Film Service::getFilmCos(string titlu)
+{
+	return repository.getFilmCos(Film {titlu,"",0,""});
+}
+
 void Service::adaugaCos(string titlu)
 {
 	Film film = getFilm(titlu);

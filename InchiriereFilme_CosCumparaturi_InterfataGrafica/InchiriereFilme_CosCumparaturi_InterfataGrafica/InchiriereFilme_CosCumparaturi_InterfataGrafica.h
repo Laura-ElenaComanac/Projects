@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QApplication>
 #include "Service.h"
+#include "UI.h"
 #include <QtWidgets/qlabel.h>
 #include <QtWidgets/qpushbutton.h>
 #include <QtWidgets/qboxlayout.h>
@@ -15,117 +16,19 @@
 #include <qbrush.h>
 #include <QSpinBox>
 #include <QGridLayout> 
-
-class CosGUI : public QWidget
-{
-protected:
-	//RepositoryFile repoFile{ "Cos.txt", 0 };
-	//Service& srv{ repoFile };
-	Service& srv;
-	QListWidget* cos = new QListWidget;
-	QGridLayout* lyMain = new QGridLayout;
-
-	QPushButton* btnAdauga = new QPushButton{ "&Adauga Cos" };
-	QPushButton* btnSterge = new QPushButton{ "&Goleste Cos" };
-	QPushButton* btnGenereaza = new QPushButton{ "&Genereaza Cos" };
-	QPushButton* btnIesire = new QPushButton{ "&Iesire" };
-
-	QLineEdit* txtTitlu = new QLineEdit;
-	QLineEdit* txtGen = new QLineEdit;
-	QLineEdit* txtAn = new QLineEdit;
-	QLineEdit* txtActor = new QLineEdit;
-
-	void initGUI() {
-
-		setLayout(lyMain);
-		lyMain->addWidget(cos);
-
-		auto stgLy = new QVBoxLayout;
-
-		// descriere film
-		auto formLy = new QFormLayout;
-		formLy->addRow("Titlu", txtTitlu);
-		formLy->addRow("Gen", txtGen);
-		formLy->addRow("Anul aparitiei", txtAn);
-		formLy->addRow("Actor principal", txtActor);
-		stgLy->addLayout(formLy);
-
-		// lista butoane
-		auto lyBtns = new QHBoxLayout;
-
-		lyBtns->addWidget(btnAdauga);
-		lyBtns->addWidget(btnSterge);
-		lyBtns->addWidget(btnGenereaza);
-		lyBtns->addWidget(btnIesire);
-
-		stgLy->addLayout(lyBtns);
-
-		lyMain->addLayout(stgLy,0,0);
-	}
-	void loadData() {
-		// fereastra filme
-		cos->clear();
-		vector<Film> filme = srv.getCos();
-
-		for (Film film : filme)
-		{
-			//string titlu = film.getTitlu();
-			//list->addItem(QString::fromStdString(titlu));
-
-			QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(film.getTitlu()));
-			item->setData(Qt::UserRole, QString::fromStdString(film.getGen()));
-			//item->setData(Qt::UserRole, QString::number(film.getAn()));
-			//item->setData(Qt::UserRole, QString::fromStdString(film.getActor()));
-
-			//item->setBackground(QBrush{ Qt::blue, Qt::SolidPattern });
-			item->setTextColor(Qt::green);
-			item->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
-			cos->addItem(item);
-		}
-	}
-	void initConnect() {
-		QObject::connect(cos, &QListWidget::itemSelectionChanged, [&]() {
-			auto sel = cos->selectedItems();
-			if (sel.isEmpty()) {
-				txtTitlu->setText("");
-				txtGen->setText("");
-				txtAn->setText("");
-				txtActor->setText("");
-			}
-			else {
-				auto selItem = sel.at(0);
-
-				// extragem atributele existente ale elementului selectat
-				auto titlu = selItem->text();
-				auto gen = selItem->data(Qt::UserRole).toString();
-
-				// gasim filmul in lista
-				auto film = srv.getFilm(titlu.toStdString());
-
-				// setam lineEdit-urile cu atributele filmului
-				txtTitlu->setText(titlu);
-				txtGen->setText(gen);
-				txtAn->setText(QString::number(film.getAn()));
-				txtActor->setText(QString::fromStdString(film.getActor()));
-			}
-			});
-	}
-public:
-	CosGUI(Service & srv) :srv{ srv }
-	{
-		initGUI();
-		loadData();
-		initConnect();
-	}
-};
+#include <QGroupBox> 
+#include "CosGUI.h"
 
 class FilmeGUI : public QWidget
 {
 private:
-	friend class cosGui;
+	//friend class CosGui;
 	Service& service;
+	UI& ui;
 	QListWidget* list = new QListWidget;
-	QHBoxLayout* lyMain = new QHBoxLayout{};
+	QGridLayout* lyMain = new QGridLayout{};
+
+	//QGroupBox* box = new QGroupBox{"Cos"};
 
 	QPushButton* btnAdauga = new QPushButton{ "&Adauga" };
 	QPushButton* btnSterge = new QPushButton{ "&Sterge" };
@@ -133,8 +36,13 @@ private:
 	QPushButton* btnSorteaza = new QPushButton{ "&Sorteaza" };
 	QPushButton* btnFiltreaza = new QPushButton{ "&Filtreaza" };
 	QPushButton* btnCauta = new QPushButton{ "&Cauta" };
-	QPushButton* btnFereastra = new QPushButton{ "&Fereastra" };
+	QPushButton* btnUndo = new QPushButton{ "&Undo" };
+	QPushButton* btnStatistica = new QPushButton{ "&Statistica" };
+	QPushButton* btnFereastra = new QPushButton{ "&Cos" };
 	QPushButton* btnIesire = new QPushButton{ "&Iesire" };
+
+	QLabel* label = new QLabel{"Inchiriere filme:"};
+	QLabel* labelStat = new QLabel{ "Statisitica:" };
 
 	//QLineEdit* txtTitlu = new QLineEdit;
 	QLineEdit* txtTitlu = new QLineEdit();
@@ -142,11 +50,26 @@ private:
 	QSpinBox* txtAn = new QSpinBox();
 	QLineEdit* txtActor = new QLineEdit;
 
+	QLineEdit* txtGenStat = new QLineEdit;
+	QLineEdit* txtNumarStat = new QLineEdit;
+
 	void initGUI() {
 		setLayout(lyMain);
-		lyMain->addWidget(list);
+		setStyleSheet("QWidget{background-color: black;color:palevioletred}QPushButton{background-color:palevioletred;color:black;border-radius:20px;padding:30}QPushButton:hover{background-color:indianred}QLabel{color:palevioletred}QListWidgetItem{color:palevioletred}QLineEdit{color:palevioletred}");
 
-		auto stgLy = new QVBoxLayout;
+		//lyMain->addLayout(lyMainCos, 0, 20);
+
+		auto firstLy = new QVBoxLayout;
+		auto secondLy = new QVBoxLayout;
+		auto thirdLy = new QVBoxLayout;
+
+		firstLy->addWidget(label);
+		firstLy->addWidget(list);
+
+		auto fLy = new QHBoxLayout;
+		fLy->addWidget(btnFiltreaza);
+		fLy->addWidget(btnSorteaza);
+		firstLy->addLayout(fLy);
 
 		// descriere film
 		auto formLy = new QFormLayout;
@@ -154,7 +77,7 @@ private:
 		formLy->addRow("Gen", txtGen);
 		formLy->addRow("Anul aparitiei", txtAn);
 		formLy->addRow("Actor principal", txtActor);
-		stgLy->addLayout(formLy);
+		secondLy->addLayout(formLy);
 
 		// lista butoane
 		auto lyBtns = new QHBoxLayout;
@@ -162,19 +85,32 @@ private:
 		lyBtns->addWidget(btnAdauga);
 		lyBtns->addWidget(btnSterge);
 		lyBtns->addWidget(btnModifica);
-		lyBtns->addWidget(btnCauta);
 
-		stgLy->addLayout(lyBtns);
+		secondLy->addLayout(lyBtns);
 
-		auto lyBtns2 = new QHBoxLayout;
-		lyBtns2->addWidget(btnFiltreaza);
-		lyBtns2->addWidget(btnSorteaza);
-		lyBtns2->addWidget(btnFereastra);
-		lyBtns2->addWidget(btnIesire);
+		auto lyBtns3 = new QHBoxLayout;
+		lyBtns3->addWidget(btnCauta);
+		lyBtns3->addWidget(btnUndo);
+		btnFereastra->setIcon(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation));
 
-		stgLy->addLayout(lyBtns2);
+		secondLy->addLayout(lyBtns3);
 
-		lyMain->addLayout(stgLy);
+
+		auto statLy = new QFormLayout;
+
+		//statLy->addWidget(labelStat);
+		statLy->addWidget(btnStatistica);
+		statLy->addRow("Gen:", txtGenStat);
+		statLy->addRow("Numar:", txtNumarStat);
+		statLy->addWidget(btnFereastra);
+		btnIesire->setIcon(QApplication::style()->standardIcon(QStyle::SP_DialogCancelButton));
+		statLy->addWidget(btnIesire);
+
+		thirdLy->addLayout(statLy);
+
+		lyMain->addLayout(firstLy,0,10);
+		lyMain->addLayout(secondLy,0,20);
+		lyMain->addLayout(thirdLy, 0, 30);
 	}
 	void loadData() {
 		// fereastra filme
@@ -192,7 +128,7 @@ private:
 			//item->setData(Qt::UserRole, QString::fromStdString(film.getActor()));
 
 			//item->setBackground(QBrush{ Qt::blue, Qt::SolidPattern });
-			item->setTextColor(Qt::blue);
+			//item->setTextColor(Qt::lightcoral);
 			item->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
 			list->addItem(item);
 		}
@@ -223,11 +159,38 @@ private:
 				txtActor->setText(QString::fromStdString(film.getActor()));
 			}
 			});
+		QObject::connect(btnUndo, &QPushButton::clicked, [&]() {
+			try {
+				service.undo();
+			}
+			catch (RepoException& ex) {
+				QMessageBox::warning(this, "Warning!", QString::fromStdString(ex.getMesaj()));
+			}
+			loadData();
+			});
+		QObject::connect(btnStatistica, &QPushButton::clicked, [&]() {
+			auto gen = txtGenStat->text();
+			int nr,test=0;
+			vector<DTO> v = service.statistica(nr);
+			for (DTO& obj : v)
+			{
+				if (obj.getGen() == gen.toStdString())
+				{
+					txtNumarStat->setText(QString::number(obj.getNrFilme()));
+					test = 1;
+				}
+			}
+			if (!test)
+				txtNumarStat->setText("");
+			loadData();
+			});
 		QObject::connect(btnFereastra, &QPushButton::clicked, [&]() {
-			auto fereastra = new QWidget;
-			//CosGUI guiCos{ srv };
-			//guiCos.show();
-			fereastra->show();
+			//auto fereastra = new QWidget;
+			//fereastra->show();
+			//RepositoryFile repoFile{ "Filme.txt", 0 };
+			//Service srv{ repoFile };
+			auto guiCos = new CosGUI{service,ui};
+			guiCos->show();
 			});
 		QObject::connect(btnCauta, &QPushButton::clicked, [&]() {
 			auto titlu = txtTitlu->text();
@@ -347,7 +310,7 @@ private:
 			});
 	}
 public:
-	FilmeGUI(Service& service) :service{ service }
+	FilmeGUI(Service& service, UI& ui) :service{ service }, ui{ui}
 	{
 		initGUI();
 		loadData();

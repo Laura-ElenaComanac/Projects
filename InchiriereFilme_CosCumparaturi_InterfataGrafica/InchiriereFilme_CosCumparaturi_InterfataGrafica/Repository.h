@@ -26,6 +26,7 @@ public:
 
 	virtual void initializeazaRepo() = 0;
 	virtual vector<Film> getCos() = 0;
+	virtual Film getFilmCos(Film film) = 0;
 	virtual void adaugaCos(string titlu) = 0;
 	virtual void golesteCos() = 0;
 	virtual void genereazaCos(int nrFilme) = 0;
@@ -53,6 +54,8 @@ public:
 
 	/*Returneaza lista cos*/
 	vector<Film> getCos();
+
+	Film getFilmCos(Film film);
 
 	/*Adauga un film in lista cos, gasit dupa titlu in repository
 	Arunca exceptie daca filmul e inexistent*/

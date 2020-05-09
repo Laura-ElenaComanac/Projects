@@ -91,6 +91,7 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CosGUI.h" />
     <ClInclude Include="InchiriereFilme_CosCumparaturi_InterfataGrafica.h" />
   </ItemGroup>
   <ItemGroup>

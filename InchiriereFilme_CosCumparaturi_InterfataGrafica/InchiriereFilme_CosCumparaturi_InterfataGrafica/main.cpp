@@ -1,4 +1,5 @@
 #include "InchiriereFilme_CosCumparaturi_InterfataGrafica.h"
+#include "CosGUI.h"
 
 int main(int argc, char *argv[])
 {
@@ -6,8 +7,9 @@ int main(int argc, char *argv[])
 
 	RepositoryFile repoFile{ "Filme.txt", 0 };
 	Service srv{ repoFile };
-	FilmeGUI gui{ srv };
-	CosGUI guiCos{ srv };
+	UI ui{ srv };
+	FilmeGUI gui{ srv , ui};
+	//CosGUI guiCos{ srv };
 
 	gui.show();
 

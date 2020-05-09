@@ -37,6 +37,8 @@ public:
 	/*Initializeaza repository cu 10 filme*/
 	void initializare();
 
+	Film getFilmCos(string titlu);
+
 	/*Adauga un film in lista cos, gasit dupa titlu in repository
 	Arunca exceptie daca filmul e inexistent*/
 	void adaugaCos(string titlu);

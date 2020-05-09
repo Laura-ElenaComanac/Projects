@@ -91,6 +91,9 @@
     <ClInclude Include="InchiriereFilme_CosCumparaturi_InterfataGrafica.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CosGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Filme.txt" />

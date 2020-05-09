@@ -1,12 +1,10 @@
 Terminator,SF,84,Arnold Schwarzenegger
 Passengers,romantic,11,Jennifer Lawrence
-Inception2,thriller,16,Leonardo DiCaprio
 Colonia,history,14,Emma Watson
-Interstellar,SF,16,Matthew McConaughey
 Inception,thriller,16,Leonardo DiCaprio
-Nerve,crime,19,Emma Roberts
 Oblivion,action,15,Tom Cruise
+Nerve,crime,19,Emma Roberts
 Noah,biblical,99,Russel Crowe
 Titanic,drama,98,Leonardo DiCaprio
 Bohemian Rhapsody,drama,18,Rami Malek
-w,aaa,2014,Matthew McConaughey
+w,SF,99,Matthew McConaughey

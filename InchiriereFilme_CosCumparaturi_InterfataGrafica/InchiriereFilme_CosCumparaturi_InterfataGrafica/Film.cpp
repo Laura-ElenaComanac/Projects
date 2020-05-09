@@ -35,7 +35,7 @@ void Film::setActor(string actorC)
 
 bool Film::operator==(const Film& f)
 {
-	if (this->titlu == f.titlu && this->gen == f.gen && this->actor_principal == f.actor_principal && this->anul_aparitiei == f.anul_aparitiei)
+	if (this->titlu == f.titlu)
 		return true;
 	return false;
 }

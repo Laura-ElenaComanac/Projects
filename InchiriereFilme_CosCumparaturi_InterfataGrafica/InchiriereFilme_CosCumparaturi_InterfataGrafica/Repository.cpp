@@ -39,8 +39,24 @@ vector<Film> Repository::getCos()
 	return cos;
 }
 
+Film Repository::getFilmCos(Film film)
+{
+	vector<Film>::iterator it = std::find(cos.begin(), cos.end(), film);
+	if (it == cos.end())
+		throw RepoException("Film inexistent!");
+	return *it;
+}
+
 void Repository::adaugaCos(string titlu)
 {
+	/*
+	for(int i=0;i<cos.size();i++)
+		if(cos[i].getTitlu()==titlu)
+			throw RepoException("Film existent!");
+	Film film = getFilmCos(Film{titlu,"",0,""});
+	cos.push_back(film);
+	*/
+	//Film film = getFilmCos(Film{ titlu,"",0,"" });
 	unordered_map<string, Film>::iterator it = filme.begin();
 	while (it != filme.end())
 	{
