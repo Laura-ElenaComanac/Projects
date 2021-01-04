@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "dgSpecHash": "jvtO4zXzhL6nv4UFpXSy7dYbM2u6fq/UJBgE+HiI+69bW6UPIzZVSc5ydVWNxahdIA/ASKbGEyIkGfY5rZ0DIw==",
+  "success": true,
+  "projectFilePath": "C:\\visual projects\\Lab9_MAP\\Lab9_MAP\\Lab9_MAP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\microsoft.crmsdk.workflow\\9.0.2.29\\microsoft.crmsdk.workflow.9.0.2.29.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\laura-elena.olaru\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.CrmSdk.Workflow 9.0.2.29' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.CrmSdk.Workflow",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

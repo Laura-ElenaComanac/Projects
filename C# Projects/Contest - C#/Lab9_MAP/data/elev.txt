@@ -1,0 +1,45 @@
+﻿1,Oprea Sebastian,Scoala Gimnaziala Horea
+2,Pintea Ilinca,Scoala Gimnaziala Octavian Goga
+3,Ciocan Ariana,Liceul Teoretic Lucian Blaga
+4,Rus Roberta,Scoala Gimnaziala Horea
+5,Oltean Luca,Scoala Gimnaziala Octavian Goga
+6,Moldovan Carina,Liceul Teoretic Lucian Blaga
+7,Marica Luca,Scoala Gimnaziala Horea
+8,Rusu Andrei,Scoala Gimnaziala Octavian Goga
+9,Coroian Ioana,Liceul Teoretic Lucian Blaga
+10,Duicu Ruxandra,Scoala Gimnaziala Horea
+11,Fodor Patricia,Scoala Gimnaziala Octavian Goga
+12,Ober Alexia,Liceul Teoretic Lucian Blaga
+13,Rusu Barbara,Scoala Gimnaziala Horea
+14,Vlad Radu,Scoala Gimnaziala Octavian Goga
+15,Radu Larisa,Liceul Teoretic Lucian Blaga
+16,Gorea Denisa,Scoala Gimnaziala Horea
+17,Hamos Elisa,Scoala Gimnaziala Octavian Goga
+18,Hancu Alexandru,Liceul Teoretic Lucian Blaga
+19,Merdar Maria,Scoala Gimnaziala Horea
+20,Nistor Valentin,Scoala Gimnaziala Octavian Goga
+21,Oltean Mario,Liceul Teoretic Lucian Blaga
+22,Vlasiu Alesia,Scoala Gimnaziala Horea
+23,Ugran Radu,Scoala Gimnaziala Octavian Goga
+24,Popescu Mihnea,Liceul Teoretic Lucian Blaga
+25,Roman Paul,Scoala Gimnaziala Horea
+26,Bloj Andrei,Scoala Gimnaziala Octavian Goga
+27,Pop Andrada,Liceul Teoretic Lucian Blaga
+28,Pop David,Scoala Gimnaziala Horea
+29,Blaga Cristiana,Scoala Gimnaziala Octavian Goga
+30,Codreanu Nicoleta,Liceul Teoretic Lucian Blaga
+31,Coman Medeea,Scoala Gimnaziala Horea
+32,Oros Flavia,Scoala Gimnaziala Octavian Goga
+33,Stoica Raul,Liceul Teoretic Lucian Blaga
+34,Stanciu Ana,Scoala Gimnaziala Horea
+35,Toader Georgeta,Scoala Gimnaziala Octavian Goga
+36,Marton Andrea,Liceul Teoretic Lucian Blaga
+37,Turcu Flavius,Scoala Gimnaziala Horea
+38,Vlas Dumitru,Scoala Gimnaziala Octavian Goga
+39,Stoica Vlad,Liceul Teoretic Lucian Blaga
+40,Vlad Antonia,Scoala Gimnaziala Horea
+41,Damian Naomi,Scoala Gimnaziala Octavian Goga
+42,Oltean Denisa,Liceul Teoretic Lucian Blaga
+43,Orza Paula,Scoala Gimnaziala Horea
+44,Valenti Alex,Scoala Gimnaziala Octavian Goga
+45,Anton Raluca,Liceul Teoretic Lucian Blaga
