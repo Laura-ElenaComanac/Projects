@@ -1,1 +1,1 @@
-# Java Projects with graphical interface
+# Java Projects With Graphical Interface
