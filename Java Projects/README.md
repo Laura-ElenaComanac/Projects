@@ -4,6 +4,6 @@
   
   Holidays
   
-  MySocialNetwork
+  MySocialNetwork -- The best
   
   Teacher-Students
