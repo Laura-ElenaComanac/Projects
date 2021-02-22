@@ -1,4 +1,4 @@
-# Java Projects With Graphical Interface
+# Java Projects With Graphical Interfaces
 
   Boss-Employees
   
