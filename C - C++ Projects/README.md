@@ -1,7 +1,7 @@
 # C - C++ Projects
 
 
-  Data Strucutres And Algorithms
+  Data Strucutres And Algorithms - C++
   
   Electronics Store - C
   
