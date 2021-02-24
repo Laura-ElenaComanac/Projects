@@ -25,7 +25,7 @@
 ![image-app04](https://user-images.githubusercontent.com/57533863/108737060-e1190b80-753a-11eb-8782-bad75576352b.png)
 
 
-  ### Retract sent friend requests (if you changed your mind :( )
+  ### Retract sent friend requests
   
   
 ![image-app05](https://user-images.githubusercontent.com/57533863/108737431-453bcf80-753b-11eb-8c99-c3fad98cca1f.png)
