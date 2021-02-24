@@ -1,6 +1,6 @@
 # Java Projects With Graphical Interfaces
 
-## Applications that use Layered Architecture, Observer pattern and JavaFX for the GUI
+## Applications that use Layered Architecture, Observer pattern and JavaFX and CSS for the GUI
 
 
   Boss-Employees
