@@ -1,6 +1,8 @@
-# Movie Rental With Shopping Cart - Qt and CSS Graphical Interface in C++ having Layered architecture and Observer pattern
+# Movie Rental With Shopping Cart - C++
 
-## The Admin can make the CRUD operations and the client can rent the movies he wants
+## An application that has Layered architecture and Observer pattern and Qt and CSS for the Graphical Interface
+
+### The Admin can make the CRUD operations and the client can rent the movies he wants
 
 ![image-app01](https://user-images.githubusercontent.com/57533863/109113565-20b34380-7745-11eb-8c0c-e2f546f7a3fa.png)
 
